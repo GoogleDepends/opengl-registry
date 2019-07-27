@@ -27,7 +27,7 @@ Version
 
 Number
 
-    OpenGL Extension #540
+    OpenGL Extension #543
 
 Dependencies
 

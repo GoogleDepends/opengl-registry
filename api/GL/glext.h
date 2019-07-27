@@ -51,7 +51,7 @@ extern "C" {
 #define GLAPI extern
 #endif
 
-#define GL_GLEXT_VERSION 20190524
+#define GL_GLEXT_VERSION 20190727
 
 #include <KHR/khrplatform.h>
 
@@ -9259,6 +9259,11 @@ GLAPI void APIENTRY glGetPerfQueryInfoINTEL (GLuint queryId, GLuint queryNameLen
 #define GL_TEXTURE_2D_STACK_BINDING_MESAX 0x875E
 #endif /* GL_MESAX_texture_stack */
 
+#ifndef GL_MESA_framebuffer_flip_y
+#define GL_MESA_framebuffer_flip_y 1
+#define GL_FRAMEBUFFER_FLIP_Y_MESA        0x8BBB
+#endif /* GL_MESA_framebuffer_flip_y */
+
 #ifndef GL_MESA_pack_invert
 #define GL_MESA_pack_invert 1
 #define GL_PACK_INVERT_MESA               0x8758
@@ -9372,6 +9377,10 @@ GLAPI void APIENTRY glEndConditionalRenderNVX (void);
 #define GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX 0x904B
 #endif /* GL_NVX_gpu_memory_info */
 
+#ifndef GL_NVX_gpu_multicast2
+#define GL_NVX_gpu_multicast2 1
+#endif /* GL_NVX_gpu_multicast2 */
+
 #ifndef GL_NVX_linked_gpu_multicast
 #define GL_NVX_linked_gpu_multicast 1
 #define GL_LGPU_SEPARATE_STORAGE_BIT_NVX  0x0800
@@ -9385,6 +9394,10 @@ GLAPI void APIENTRY glLGPUCopyImageSubDataNVX (GLuint sourceGpu, GLbitfield dest
 GLAPI void APIENTRY glLGPUInterlockNVX (void);
 #endif
 #endif /* GL_NVX_linked_gpu_multicast */
+
+#ifndef GL_NVX_progress_fence
+#define GL_NVX_progress_fence 1
+#endif /* GL_NVX_progress_fence */
 
 #ifndef GL_NV_alpha_to_coverage_dither_control
 #define GL_NV_alpha_to_coverage_dither_control 1
@@ -9997,40 +10010,6 @@ GLAPI void APIENTRY glMulticastGetQueryObjecti64vNV (GLuint gpu, GLuint id, GLen
 GLAPI void APIENTRY glMulticastGetQueryObjectui64vNV (GLuint gpu, GLuint id, GLenum pname, GLuint64 *params);
 #endif
 #endif /* GL_NV_gpu_multicast */
-
-/* NVX_gpu_multicast2 */
-#ifndef GL_NVX_gpu_multicast2
-#define GL_NVX_gpu_multicast2 1
-#define GL_UPLOAD_GPU_MASK_NV             0x954A
-typedef void (GLAPIENTRYP PFNGLUPLOADGPUMASKNVXPROC) (GLbitfield mask);
-typedef void (GLAPIENTRYP PFNGLMULTICASTVIEWPORTARRAYVNVXPROC) (GLuint gpu, GLuint first, GLsizei count, const GLfloat *v);
-typedef void (GLAPIENTRYP PFNGLMULTICASTVIEWPORTPOSITIONWSCALENVXPROC) (GLuint gpu, GLuint index, GLfloat xcoeff, GLfloat ycoeff);
-typedef void (GLAPIENTRYP PFNGLMULTICASTSCISSORARRAYVNVXPROC) (GLuint gpu, GLuint first, GLsizei count, const GLint *v);
-typedef void (GLAPIENTRYP PFNGLASYNCCOPYBUFFERSUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValues, GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValues);
-typedef void (GLAPIENTRYP PFNGLASYNCCOPYIMAGESUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValues, GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLuint srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLuint dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValues);
-#ifdef GL_GLEXT_PROTOTYPES
-GLAPI void GLAPIENTRY glUploadGpuMaskNVX(GLbitfield mask);
-GLAPI void GLAPIENTRY glMulticastViewportArrayvNVX(GLuint gpu, GLuint first, GLsizei count, const GLfloat *v);
-GLAPI void GLAPIENTRY glMulticastViewportPositionWScaleNVX(GLuint gpu, GLuint index, GLfloat xcoeff, GLfloat ycoeff);
-GLAPI void GLAPIENTRY glMulticastScissorArrayvNVX(GLuint gpu, GLuint first, GLsizei count, const GLint *v);
-GLAPI void GLAPIENTRY glAsyncCopyBufferSubDataNVX(GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValues, GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValues);
-GLAPI void GLAPIENTRY glAsyncCopyImageSubDataNVX(GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValues, GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLuint srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLuint dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValues);
-#endif
-#endif /* GL_NVX_gpu_multicast2 */
-
-#ifndef GL_NVX_progress_fence
-#define GL_NVX_progress_fence 1
-typedef GLuint(GLAPIENTRYP PFNGLCREATEPROGRESSFENCENVXPROC) (void);
-typedef void (GLAPIENTRYP PFNGLSIGNALSEMAPHOREUI64NVXPROC) (GLuint signalGpu, GLsizei semaphoreCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
-typedef void (GLAPIENTRYP PFNGLWAITSEMAPHOREUI64NVXPROC) (GLuint waitGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
-typedef void (GLAPIENTRYP PFNGLCLIENTWAITSEMAPHOREUI64NVXPROC) (GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
-#ifdef GL_GLEXT_PROTOTYPES
-GLAPI GLuint GLAPIENTRY glCreateProgressFenceNVX(void);
-GLAPI void GLAPIENTRY glSignalSemaphoreui64NVX(GLuint signalGpu, GLsizei semaphoreCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
-GLAPI void GLAPIENTRY glWaitSemaphoreui64NVX(GLuint waitGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
-GLAPI void GLAPIENTRY glClientWaitSemaphoreui64NVX(GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
-#endif
-#endif /* GL_NVX_progress_fence */
 
 #ifndef GL_NV_gpu_program4
 #define GL_NV_gpu_program4 1
